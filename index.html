@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chonburi Stay Walk — บ้าน/คอนโดเช่า ชลบุรี เดินดูภายในก่อนตัดสินใจ</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">
+      <div class="logo-mark">CB</div>
+      <span data-lang="th" class="lang-active">ชลบุรี สเตย์ วอล์ก</span>
+      <span data-lang="en">Chonburi Stay Walk</span>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <button data-lang="th" class="active" onclick="setLang('th')">ไทย</button>
+        <button data-lang="en" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="contact-pill" onclick="contactLine()">
+        💬 <span data-lang="th" class="lang-active">ติดต่อ</span><span data-lang="en">Contact</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LIST VIEW (home) ===== -->
+<div id="listView">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="eyebrow">
+        <span data-lang="th" class="lang-active">บ้าน/คอนโดเช่า ในชลบุรี</span>
+        <span data-lang="en">Houses & condos for rent in Chonburi</span>
+      </div>
+      <h1>
+        <span data-lang="th" class="lang-active">เดินดู<em>ภายในบ้าน</em>ก่อน<br>ไปดูสถานที่จริง</span>
+        <span data-lang="en">Walk through the <em>inside</em><br>before you visit in person</span>
+      </h1>
+      <p class="lede" data-lang="th-fallback">
+        <span data-lang="th" class="lang-active">เลือกบ้านหรือคอนโดที่ใช่ ด้วยภาพถ่ายและ virtual walkthrough ที่ให้คุณเห็นทุกห้องจริง ก่อนนัดไปดูสถานที่ ประหยัดเวลา ตัดสินใจง่ายขึ้น</span>
+        <span data-lang="en">Find the right place using real photos and virtual walkthroughs that show you every room before you book a viewing. Save time, decide with confidence.</span>
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('listings').scrollIntoView({behavior:'smooth'})">
+          <span data-lang="th" class="lang-active">ดูทรัพย์ทั้งหมด</span>
+          <span data-lang="en">Browse properties</span>
+          →
+        </button>
+        <button class="btn-ghost" onclick="contactLine()">
+          <span data-lang="th" class="lang-active">ทักไลน์สอบถาม</span>
+          <span data-lang="en">Chat on LINE</span>
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">20+</div>
+          <div class="hero-stat-label" data-lang="th" data-active="">
+            <span data-lang="th" class="lang-active">ทรัพย์ที่พร้อมให้เช่า</span>
+            <span data-lang="en">Properties available</span>
+          </div>
+        </div>
+        <div>
+          <div class="hero-stat-num">2</div>
+          <div class="hero-stat-label">
+            <span data-lang="th" class="lang-active">ภาษา ไทย/อังกฤษ</span>
+            <span data-lang="en">Languages, TH/EN</span>
+          </div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">
+            <span data-lang="th" class="lang-active">ทรัพย์จริง ไม่มีนายหน้าซ้ำซ้อน</span>
+            <span data-lang="en">Direct from owner</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <img src="images/web/property1-living.jpg" alt="Interior walkthrough preview">
+      <div class="drag-hint">🖱️ <span data-lang="th" class="lang-active">คลิกลากเพื่อหมุนดู</span><span data-lang="en">Drag to look around</span></div>
+      <div class="walk-badge">
+        <div class="walk-badge-icon">🧭</div>
+        <div class="walk-badge-text">
+          <strong data-lang="th" class="lang-active">เดินดูในบ้านได้จริง</strong>
+          <strong data-lang="en">Real interior walkthrough</strong>
+          <span data-lang="th" class="lang-active">คลิกเชื่อมห้องต่อห้อง เหมือนเดินเข้าไปเอง</span>
+          <span data-lang="en">Click between rooms, just like being there</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <div class="search-bar">
+      <div class="field">
+        <label data-lang="th" class="lang-active">ทำเล</label>
+        <label data-lang="en">Location</label>
+        <input id="fLocation" type="text" placeholder="พัทยา, บางแสน, ศรีราชา...">
+      </div>
+      <div class="field">
+        <label data-lang="th" class="lang-active">ประเภท</label>
+        <label data-lang="en">Type</label>
+        <select id="fType">
+          <option value="" data-lang="th" class="lang-active">ทั้งหมด</option>
+          <option value="house">บ้านเดี่ยว / House</option>
+          <option value="condo">คอนโด / Condo</option>
+          <option value="townhouse">ทาวน์โฮม / Townhouse</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-lang="th" class="lang-active">ช่วงราคา</label>
+        <label data-lang="en">Price range</label>
+        <select id="fPrice">
+          <option value="">—</option>
+          <option value="0-10000">≤ 10,000 ฿</option>
+          <option value="10000-20000">10,000–20,000 ฿</option>
+          <option value="20000-35000">20,000–35,000 ฿</option>
+          <option value="35000-999999">35,000+ ฿</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-lang="th" class="lang-active">ห้องนอนขั้นต่ำ</label>
+        <label data-lang="en">Min. bedrooms</label>
+        <select id="fBeds">
+          <option value="">—</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="3">3+</option>
+          <option value="4">4+</option>
+        </select>
+      </div>
+      <button class="search-btn" onclick="applySearch()">
+        🔍 <span data-lang="th" class="lang-active">ค้นหา</span><span data-lang="en">Search</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- LISTINGS -->
+  <div class="section" id="listings">
+    <div class="section-head">
+      <div>
+        <h2 data-lang="th" class="lang-active">ทรัพย์ที่พร้อมให้เช่า</h2>
+        <h2 data-lang="en">Available properties</h2>
+        <p>
+          <span data-lang="th" class="lang-active">คลิกที่ทรัพย์เพื่อดูภาพ รายละเอียด และ virtual walkthrough</span>
+          <span data-lang="en">Click a listing to see photos, details, and the virtual walkthrough</span>
+        </p>
+      </div>
+      <div class="result-count" id="resultCount"></div>
+    </div>
+    <div class="grid" id="listingGrid"></div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>
+          <span data-lang="th" class="lang-active">ชลบุรี สเตย์ วอล์ก</span>
+          <span data-lang="en">Chonburi Stay Walk</span>
+        </h4>
+        <p data-lang="th" class="lang-active">บ้านและคอนโดเช่าในชลบุรี ดูภายในก่อนตัดสินใจ</p>
+        <p data-lang="en">Houses and condos for rent in Chonburi. See inside before you decide.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-lang="th" class="lang-active">ติดต่อ</h4>
+        <h4 data-lang="en">Contact</h4>
+        <a href="tel:+66923959969">📞 092-395-9969</a>
+        <a href="tel:+66932342457">📞 093-234-2457</a>
+        <a href="#" onclick="contactLine()">💬 LINE ID: Khate095</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-lang="th" class="lang-active">พื้นที่ให้บริการ</h4>
+        <h4 data-lang="en">Service area</h4>
+        <p>Pattaya · Jomtien · Sriracha · Bang Saen · Ban Bueng</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Chonburi Stay Walk</div>
+  </footer>
+</div>
+
+<!-- ===== DETAIL VIEW ===== -->
+<div id="detailView" class="detail-wrap">
+  <div class="detail-header">
+    <div class="back-link" onclick="closeDetail()">
+      ← <span data-lang="th" class="lang-active">กลับไปหน้ารายการ</span><span data-lang="en">Back to listings</span>
+    </div>
+    <div class="detail-title-row">
+      <div>
+        <h1 id="detailTitle"></h1>
+        <div class="detail-loc" id="detailLoc"></div>
+      </div>
+      <div class="detail-price">
+        <div class="amt" id="detailPriceAmt"></div>
+        <div class="per" id="detailPricePer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-specs" id="detailSpecs"></div>
+
+  <div class="media-tabs">
+    <button class="media-tab" data-tab="tour" onclick="switchMediaTab('tour')">
+      🧭 <span data-lang="th" class="lang-active">เดินดูภายใน</span><span data-lang="en">Walkthrough</span>
+    </button>
+    <button class="media-tab" data-tab="gallery" onclick="switchMediaTab('gallery')">
+      🖼️ <span data-lang="th" class="lang-active">รูปภาพทั้งหมด</span><span data-lang="en">All photos</span>
+    </button>
+  </div>
+
+  <div class="media-stage">
+    <div id="tourStage">
+      <div class="tour-viewer">
+        <div id="panorama"></div>
+        <div class="tour-empty" id="tourEmptyState">
+          <div class="tour-empty-icon">🧭</div>
+          <strong data-lang="th" class="lang-active">ยังไม่มี virtual walkthrough สำหรับทรัพย์นี้</strong>
+          <strong data-lang="en">No virtual walkthrough yet for this property</strong>
+          <span style="font-size:0.85rem;opacity:0.8;max-width:380px;" data-lang="th" class="lang-active">เจ้าของกำลังถ่ายภาพ 360° เพิ่มเติม สามารถดูรูปภาพทั้งหมดได้ที่แท็บ "รูปภาพทั้งหมด"</span>
+          <span style="font-size:0.85rem;opacity:0.8;max-width:380px;" data-lang="en">The owner is preparing 360° photos. Check the "All photos" tab in the meantime.</span>
+        </div>
+      </div>
+      <div class="room-pills" id="roomPills"></div>
+    </div>
+    <div id="galleryStage" style="display:none;">
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </div>
+
+  <div class="detail-columns">
+    <div>
+      <h3 data-lang="th" class="lang-active">รายละเอียด</h3>
+      <h3 data-lang="en">Description</h3>
+      <p class="detail-desc" id="detailDesc"></p>
+
+      <h3 style="margin-top:30px;" data-lang="th" class="lang-active">สิ่งอำนวยความสะดวก</h3>
+      <h3 style="margin-top:30px;" data-lang="en">Amenities</h3>
+      <div class="amenity-grid" id="amenityGrid"></div>
+    </div>
+
+    <div class="contact-card">
+      <h3 data-lang="th" class="lang-active">สนใจทรัพย์นี้?</h3>
+      <h3 data-lang="en">Interested in this property?</h3>
+      <p data-lang="th" class="lang-active">ทักหาเราเพื่อนัดดูสถานที่จริง หรือสอบถามรายละเอียดเพิ่มเติม</p>
+      <p data-lang="en">Message us to schedule a viewing or ask for more details.</p>
+      <button class="contact-btn line" onclick="contactLine()">
+        💬 <span data-lang="th" class="lang-active">ทักไลน์</span><span data-lang="en">Message on LINE</span>
+      </button>
+      <button class="contact-btn wa" onclick="contactWhatsApp()">
+        📱 WhatsApp
+      </button>
+      <button class="contact-btn tel" onclick="contactTel()">
+        📞 <span data-lang="th" class="lang-active">โทร 092-395-9969</span><span data-lang="en">Call 092-395-9969</span>
+      </button>
+      <button class="contact-btn tel" onclick="window.location.href='tel:+66932342457'">
+        📞 <span data-lang="th" class="lang-active">โทร 093-234-2457</span><span data-lang="en">Call 093-234-2457</span>
+      </button>
+      <div class="note-box">
+        <span data-lang="th" class="lang-active">💡 แนะนำให้ดู virtual walkthrough ก่อนนัดหมาย เพื่อให้แน่ใจว่าทรัพย์นี้ตรงกับที่คุณต้องการ</span>
+        <span data-lang="en">💡 We recommend viewing the walkthrough before scheduling, to confirm this property fits your needs.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="">
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
