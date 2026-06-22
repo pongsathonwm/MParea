@@ -13,6 +13,8 @@ const PROPERTIES = [
   {
     id: 1,
     real: true,
+    lat: 13.143513,
+    lng: 100.930317,
     title: "บ้านเดี่ยว 2 ชั้น หมู่บ้านมิตรเกษียน",
     titleEn: "2-Storey Detached House, Mit Kasian Village",
     location: "บางละมุง, ชลบุรี",
@@ -42,11 +44,11 @@ const PROPERTIES = [
   },
 
   // ---- Sample placeholder properties (replace with real data later) ----
-  { id:2, real:false, title:"คอนโดวิวทะเล พัทยา", titleEn:"Sea View Condo, Pattaya", location:"พัทยา, ชลบุรี", locationEn:"Pattaya, Chonburi", price:18000, type:"condo", beds:1, baths:1, sqm:38, images:["https://placehold.co/800x600/2B3540/FAF7F1?text=Pattaya+Condo"], cover:"https://placehold.co/800x600/2B3540/FAF7F1?text=Pattaya+Condo", tour:{available:false,rooms:[]}, amenities:["air-con","pool","gym","security"], descriptionTh:"ข้อมูลตัวอย่าง รอข้อมูลจริง", descriptionEn:"Sample placeholder — awaiting real data" },
-  { id:3, real:false, title:"ทาวน์โฮม 2 ชั้น ศรีราชา", titleEn:"2-Storey Townhome, Sriracha", location:"ศรีราชา, ชลบุรี", locationEn:"Sriracha, Chonburi", price:15000, type:"townhouse", beds:2, baths:2, sqm:90, images:["https://placehold.co/800x600/6E8463/FAF7F1?text=Sriracha+Townhome"], cover:"https://placehold.co/800x600/6E8463/FAF7F1?text=Sriracha+Townhome", tour:{available:false,rooms:[]}, amenities:["air-con","parking","security"], descriptionTh:"ข้อมูลตัวอย่าง รอข้อมูลจริง", descriptionEn:"Sample placeholder — awaiting real data" },
-  { id:4, real:false, title:"คอนโดใกล้นิคมอมตะ", titleEn:"Condo near Amata Industrial Estate", location:"บ้านบึง, ชลบุรี", locationEn:"Ban Bueng, Chonburi", price:9500, type:"condo", beds:1, baths:1, sqm:32, images:["https://placehold.co/800x600/B0833D/FAF7F1?text=Amata+Condo"], cover:"https://placehold.co/800x600/B0833D/FAF7F1?text=Amata+Condo", tour:{available:false,rooms:[]}, amenities:["air-con","parking"], descriptionTh:"ข้อมูลตัวอย่าง รอข้อมูลจริง", descriptionEn:"Sample placeholder — awaiting real data" },
-  { id:5, real:false, title:"บ้านเดี่ยวสวนใหญ่ บางแสน", titleEn:"Detached House with Garden, Bang Saen", location:"บางแสน, ชลบุรี", locationEn:"Bang Saen, Chonburi", price:32000, type:"house", beds:4, baths:3, sqm:220, images:["https://placehold.co/800x600/4B5663/FAF7F1?text=Bang+Saen+House"], cover:"https://placehold.co/800x600/4B5663/FAF7F1?text=Bang+Saen+House", tour:{available:false,rooms:[]}, amenities:["air-con","kitchen","parking","garden","security","furnished"], descriptionTh:"ข้อมูลตัวอย่าง รอข้อมูลจริง", descriptionEn:"Sample placeholder — awaiting real data" },
-  { id:6, real:false, title:"คอนโดสตูดิโอ จอมเทียน", titleEn:"Studio Condo, Jomtien", location:"จอมเทียน, ชลบุรี", locationEn:"Jomtien, Chonburi", price:12000, type:"condo", beds:1, baths:1, sqm:28, images:["https://placehold.co/800x600/CFA45F/26303A?text=Jomtien+Studio"], cover:"https://placehold.co/800x600/CFA45F/26303A?text=Jomtien+Studio", tour:{available:false,rooms:[]}, amenities:["air-con","pool","security"], descriptionTh:"ข้อมูลตัวอย่าง รอข้อมูลจริง", descriptionEn:"Sample placeholder — awaiting real data" }
+  { id:2, real:false, lat:13.143547, lng:100.930218, title:"คอนโดวิวทะเล พัทยา", titleEn:"Sea View Condo, Pattaya", location:"พัทยา, ชลบุรี", locationEn:"Pattaya, Chonburi", price:18000, type:"condo", beds:1, baths:1, sqm:38, images:["https://placehold.co/800x600/2B3540/FAF7F1?text=Pattaya+Condo"], cover:"https://placehold.co/800x600/2B3540/FAF7F1?text=Pattaya+Condo", tour:{available:false,rooms:[]}, amenities:["air-con","pool","gym","security"], descriptionTh:"ข้อมูลตัวอย่าง รอข้อมูลจริง", descriptionEn:"Sample placeholder — awaiting real data" },
+  { id:3, real:false, lat:13.139290, lng:100.940530, title:"ทาวน์โฮม 2 ชั้น ศรีราชา", titleEn:"2-Storey Townhome, Sriracha", location:"ศรีราชา, ชลบุรี", locationEn:"Sriracha, Chonburi", price:15000, type:"townhouse", beds:2, baths:2, sqm:90, images:["https://placehold.co/800x600/6E8463/FAF7F1?text=Sriracha+Townhome"], cover:"https://placehold.co/800x600/6E8463/FAF7F1?text=Sriracha+Townhome", tour:{available:false,rooms:[]}, amenities:["air-con","parking","security"], descriptionTh:"ข้อมูลตัวอย่าง รอข้อมูลจริง", descriptionEn:"Sample placeholder — awaiting real data" },
+  { id:4, real:false, lat:13.139384, lng:100.942491, title:"คอนโดใกล้นิคมอมตะ", titleEn:"Condo near Amata Industrial Estate", location:"บ้านบึง, ชลบุรี", locationEn:"Ban Bueng, Chonburi", price:9500, type:"condo", beds:1, baths:1, sqm:32, images:["https://placehold.co/800x600/B0833D/FAF7F1?text=Amata+Condo"], cover:"https://placehold.co/800x600/B0833D/FAF7F1?text=Amata+Condo", tour:{available:false,rooms:[]}, amenities:["air-con","parking"], descriptionTh:"ข้อมูลตัวอย่าง รอข้อมูลจริง", descriptionEn:"Sample placeholder — awaiting real data" },
+  { id:5, real:false, lat:13.078549, lng:100.939908, title:"บ้านเดี่ยวสวนใหญ่ บางแสน", titleEn:"Detached House with Garden, Bang Saen", location:"บางแสน, ชลบุรี", locationEn:"Bang Saen, Chonburi", price:32000, type:"house", beds:4, baths:3, sqm:220, images:["https://placehold.co/800x600/4B5663/FAF7F1?text=Bang+Saen+House"], cover:"https://placehold.co/800x600/4B5663/FAF7F1?text=Bang+Saen+House", tour:{available:false,rooms:[]}, amenities:["air-con","kitchen","parking","garden","security","furnished"], descriptionTh:"ข้อมูลตัวอย่าง รอข้อมูลจริง", descriptionEn:"Sample placeholder — awaiting real data" },
+  { id:6, real:false, lat:13.391689, lng:101.030832, title:"คอนโดสตูดิโอ จอมเทียน", titleEn:"Studio Condo, Jomtien", location:"จอมเทียน, ชลบุรี", locationEn:"Jomtien, Chonburi", price:12000, type:"condo", beds:1, baths:1, sqm:28, images:["https://placehold.co/800x600/CFA45F/26303A?text=Jomtien+Studio"], cover:"https://placehold.co/800x600/CFA45F/26303A?text=Jomtien+Studio", tour:{available:false,rooms:[]}, amenities:["air-con","pool","security"], descriptionTh:"ข้อมูลตัวอย่าง รอข้อมูลจริง", descriptionEn:"Sample placeholder — awaiting real data" }
 ];
 
 const AMENITY_META = {
@@ -77,7 +79,7 @@ let currentFilter = { location:"", type:"", price:"", beds:"" };
 // ==========================================================
 function setLang(lang){
   currentLang = lang;
-  document.querySelectorAll('.lang-toggle button').forEach(b=>{
+  document.querySelectorAll('.lang-toggle button[data-lang]').forEach(b=>{
     b.classList.toggle('active', b.dataset.lang === lang);
   });
   document.querySelectorAll('[data-lang]').forEach(el=>{
@@ -88,6 +90,7 @@ function setLang(lang){
   });
   document.documentElement.lang = lang;
   renderGrid();
+  if (leafletMap) initMap(); // refresh marker popups in new language
 }
 
 // ==========================================================
@@ -166,6 +169,7 @@ function openDetail(id){
   window._currentProperty = p;
 
   document.getElementById('listView').style.display = 'none';
+  document.getElementById('mapView').classList.remove('active');
   const dv = document.getElementById('detailView');
   dv.classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
@@ -210,6 +214,81 @@ function closeDetail(){
   document.getElementById('listView').style.display = 'block';
   if (panoramaViewer) { panoramaViewer.destroy(); panoramaViewer = null; }
   window.scrollTo({top:0,behavior:'instant'});
+}
+
+// ==========================================================
+// LIST / MAP VIEW SWITCHING
+// ==========================================================
+let leafletMap = null;
+let mapMarkers = [];
+
+function openListView(){
+  document.getElementById('mapView').classList.remove('active');
+  document.getElementById('listView').style.display = 'block';
+  document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.view === 'list'));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+function openMapView(){
+  document.getElementById('listView').style.display = 'none';
+  document.getElementById('detailView').classList.remove('active');
+  document.getElementById('mapView').classList.add('active');
+  document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.toggle('active', b.dataset.view === 'map'));
+  window.scrollTo({top:0,behavior:'instant'});
+  initMap();
+}
+
+function initMap(){
+  // average lat/lng across all properties to center the map nicely
+  const lats = PROPERTIES.map(p => p.lat).filter(Boolean);
+  const lngs = PROPERTIES.map(p => p.lng).filter(Boolean);
+  const centerLat = lats.reduce((a,b)=>a+b,0) / lats.length;
+  const centerLng = lngs.reduce((a,b)=>a+b,0) / lngs.length;
+
+  if (!leafletMap){
+    leafletMap = L.map('mapContainer').setView([centerLat, centerLng], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(leafletMap);
+  } else {
+    // map already exists — just resize/recenter in case container was hidden before
+    setTimeout(() => leafletMap.invalidateSize(), 100);
+  }
+
+  // clear old markers before re-adding (handles language switches etc.)
+  mapMarkers.forEach(m => leafletMap.removeLayer(m));
+  mapMarkers = [];
+
+  PROPERTIES.forEach(p => {
+    if (!p.lat || !p.lng) return;
+    const title = currentLang === 'th' ? p.title : p.titleEn;
+    const loc = currentLang === 'th' ? p.location : p.locationEn;
+
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="map-pin-price">฿${formatPrice(p.price)}</div>`,
+      iconSize: [0,0],
+      iconAnchor: [0, 10]
+    });
+
+    const marker = L.marker([p.lat, p.lng], { icon }).addTo(leafletMap);
+    const popupHtml = `
+      <div class="map-popup">
+        <img src="${p.cover}" alt="${title}">
+        <h4>${title}</h4>
+        <div class="mp-price">฿${formatPrice(p.price)}${currentLang==='th'?'/เดือน':'/mo'}</div>
+        <div class="mp-loc">📍 ${loc}</div>
+        <button onclick="openDetail(${p.id})">
+          ${currentLang==='th' ? 'ดูรายละเอียด' : 'View details'}
+        </button>
+      </div>
+    `;
+    marker.bindPopup(popupHtml);
+    mapMarkers.push(marker);
+  });
+
+  setTimeout(() => leafletMap.invalidateSize(), 150);
 }
 
 function switchMediaTab(tab){

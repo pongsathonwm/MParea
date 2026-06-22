@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chonburi Stay Walk — บ้าน/คอนโดเช่า ชลบุรี เดินดูภายในก่อนตัดสินใจ</title>
+<title>MP Area — เช่าบ้าน คอนโด ที่ดิน ชลบุรี ที่เรา</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
@@ -14,9 +14,9 @@
 <div class="topbar">
   <div class="topbar-inner">
     <div class="logo">
-      <div class="logo-mark">CB</div>
-      <span data-lang="th" class="lang-active">ชลบุรี สเตย์ วอล์ก</span>
-      <span data-lang="en">Chonburi Stay Walk</span>
+      <div class="logo-mark">MP</div>
+      <span data-lang="th" class="lang-active">MP Area</span>
+      <span data-lang="en">MP Area</span>
     </div>
     <div class="nav-actions">
       <div class="lang-toggle">
@@ -53,6 +53,9 @@
           <span data-lang="th" class="lang-active">ดูทรัพย์ทั้งหมด</span>
           <span data-lang="en">Browse properties</span>
           →
+        </button>
+        <button class="btn-ghost" onclick="openMapView()">
+          🗺️ <span data-lang="th" class="lang-active">ดูในแผนที่</span><span data-lang="en">View on map</span>
         </button>
         <button class="btn-ghost" onclick="contactLine()">
           <span data-lang="th" class="lang-active">ทักไลน์สอบถาม</span>
@@ -156,7 +159,17 @@
           <span data-lang="en">Click a listing to see photos, details, and the virtual walkthrough</span>
         </p>
       </div>
-      <div class="result-count" id="resultCount"></div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div class="result-count" id="resultCount"></div>
+        <div class="lang-toggle">
+          <button class="view-toggle-btn active" data-view="list" onclick="openListView()">
+            📋 <span data-lang="th" class="lang-active">รายการ</span><span data-lang="en">List</span>
+          </button>
+          <button class="view-toggle-btn" data-view="map" onclick="openMapView()">
+            🗺️ <span data-lang="th" class="lang-active">แผนที่</span><span data-lang="en">Map</span>
+          </button>
+        </div>
+      </div>
     </div>
     <div class="grid" id="listingGrid"></div>
   </div>
@@ -165,11 +178,11 @@
     <div class="footer-inner">
       <div class="footer-col">
         <h4>
-          <span data-lang="th" class="lang-active">ชลบุรี สเตย์ วอล์ก</span>
-          <span data-lang="en">Chonburi Stay Walk</span>
+          <span data-lang="th" class="lang-active">MP Area</span>
+          <span data-lang="en">MP Area</span>
         </h4>
-        <p data-lang="th" class="lang-active">บ้านและคอนโดเช่าในชลบุรี ดูภายในก่อนตัดสินใจ</p>
-        <p data-lang="en">Houses and condos for rent in Chonburi. See inside before you decide.</p>
+        <p data-lang="th" class="lang-active">เช่าบ้าน คอนโด ที่ดิน ชลบุรี ที่เรา ดูภายในก่อนตัดสินใจ</p>
+        <p data-lang="en">Houses, condos and land for rent in Chonburi. See inside before you decide.</p>
       </div>
       <div class="footer-col">
         <h4 data-lang="th" class="lang-active">ติดต่อ</h4>
@@ -184,7 +197,7 @@
         <p>Pattaya · Jomtien · Sriracha · Bang Saen · Ban Bueng</p>
       </div>
     </div>
-    <div class="footer-bottom">© 2026 Chonburi Stay Walk</div>
+    <div class="footer-bottom">© 2026 MP Area</div>
   </footer>
 </div>
 
@@ -272,12 +285,26 @@
   </div>
 </div>
 
+<!-- ===== MAP VIEW ===== -->
+<div id="mapView" class="map-view-wrap">
+  <div class="map-header">
+    <div class="back-link" onclick="openListView()">
+      ← <span data-lang="th" class="lang-active">กลับไปหน้ารายการ</span><span data-lang="en">Back to listings</span>
+    </div>
+    <h2 data-lang="th" class="lang-active">แผนที่ทรัพย์ทั้งหมด</h2>
+    <h2 data-lang="en">All properties on map</h2>
+  </div>
+  <div id="mapContainer"></div>
+</div>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
   <img id="lightboxImg" src="">
 </div>
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
