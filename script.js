@@ -26,9 +26,14 @@ const PROPERTIES = [
     baths: 2,
     sqm: 145,
     images: [
-      IMG.EXT, IMG.LIV, IMG.KIT1, IMG.KIT2, IMG.BED, IMG.YARD
+      "images/web/property1-exterior.jpg",
+      "images/web/property1-living.jpg",
+      "images/web/property1-kitchen1.jpg",
+      "images/web/property1-kitchen2.jpg",
+      "images/web/property1-bedroom.jpg",
+      "images/web/property1-yard.jpg"
     ],
-    cover: IMG.EXT,
+    cover: "images/web/property1-exterior.jpg",
     tour: {
       available: false, // set true once you upload real 360° equirectangular photos
       rooms: [
