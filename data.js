@@ -8,7 +8,7 @@
 // ---- CONFIGURE THIS ----
 // Replace with your published Google Sheet CSV URL.
 // (File → Share → Publish to web → choose the sheet tab → CSV → Publish, then copy the link here)
-const SHEET_CSV_URL = "REPLACE_WITH_YOUR_PUBLISHED_SHEET_CSV_URL";
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRep0hgKCHBciQbNydg87SxtLcvuBfM0OYCKD8qUh5I18AyN-0PeJ1WkQROAo_Ne6sdlTVRn7EmnA4e/pub?gid=0&single=true&output=csv";
 
 const CACHE_KEY = "mp_area_properties_cache_v1";
 const CACHE_TIMESTAMP_KEY = "mp_area_properties_cache_time_v1";
