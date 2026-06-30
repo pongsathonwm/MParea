@@ -5,306 +5,277 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MP Area — เช่าบ้าน คอนโด ที่ดิน ชลบุรี ที่เรา</title>
 <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
 </head>
 <body>
 
 <!-- ===== TOP BAR ===== -->
-<div class="topbar">
+<div class="topbar" style="position:relative;">
   <div class="topbar-inner">
     <div class="logo">
       <div class="logo-mark">MP</div>
-      <span data-lang="th" class="lang-active">MP Area</span>
-      <span data-lang="en">MP Area</span>
+      <span>MP Area</span>
     </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html" class="current">
+        <span data-lang="th" class="lang-active">หน้าแรก</span><span data-lang="en">Home</span><span data-lang="cn">首页</span>
+      </a>
+      <a href="properties.html">
+        <span data-lang="th" class="lang-active">ค้นหาทรัพย์</span><span data-lang="en">Properties</span><span data-lang="cn">房源搜索</span>
+      </a>
+      <a href="map.html">
+        <span data-lang="th" class="lang-active">แผนที่</span><span data-lang="en">Map</span><span data-lang="cn">地图</span>
+      </a>
+    </nav>
     <div class="nav-actions">
-      <div class="lang-toggle">
+      <div class="lang-toggle lang3">
         <button data-lang="th" class="active" onclick="setLang('th')">ไทย</button>
         <button data-lang="en" onclick="setLang('en')">EN</button>
+        <button data-lang="cn" onclick="setLang('cn')">中文</button>
       </div>
       <button class="contact-pill" onclick="contactLine()">
-        💬 <span data-lang="th" class="lang-active">ติดต่อ</span><span data-lang="en">Contact</span>
+        💬 <span data-lang="th" class="lang-active">ติดต่อ</span><span data-lang="en">Contact</span><span data-lang="cn">联系</span>
       </button>
+      <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰</button>
     </div>
   </div>
 </div>
 
-<!-- ===== LIST VIEW (home) ===== -->
-<div id="listView">
-
-  <!-- HERO -->
-  <div class="hero">
-    <div>
-      <div class="eyebrow">
-        <span data-lang="th" class="lang-active">บ้าน/คอนโดเช่า ในชลบุรี</span>
-        <span data-lang="en">Houses & condos for rent in Chonburi</span>
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="eyebrow">
+      <span data-lang="th" class="lang-active">บ้าน/คอนโด/ที่ดิน ในชลบุรี</span>
+      <span data-lang="en">Houses, condos & land in Chonburi</span>
+      <span data-lang="cn">春武里的房屋、公寓与土地</span>
+    </div>
+    <h1>
+      <span data-lang="th" class="lang-active">เดินดู<em>ภายในบ้าน</em>ก่อน<br>ไปดูสถานที่จริง</span>
+      <span data-lang="en">Walk through the <em>inside</em><br>before you visit in person</span>
+      <span data-lang="cn">先<em>线上看房</em><br>再实地考察</span>
+    </h1>
+    <p class="lede">
+      <span data-lang="th" class="lang-active">MP Area ดูแลทั้งซื้อ-ขาย-เช่า บ้าน คอนโด และที่ดินในชลบุรี ดูภาพและ virtual walkthrough ก่อนตัดสินใจ ประหยัดเวลา ตัดสินใจง่ายขึ้น</span>
+      <span data-lang="en">MP Area handles buying, selling, and renting houses, condos, and land in Chonburi. View photos and virtual walkthroughs before you decide — save time, decide with confidence.</span>
+      <span data-lang="cn">MP Area 负责春武里地区房屋、公寓和土地的买卖与租赁。 先看照片和虚拟漫游，再做决定，省时又安心。</span>
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('listings').scrollIntoView({behavior:'smooth'})">
+        <span data-lang="th" class="lang-active">ดูทรัพย์ทั้งหมด</span>
+        <span data-lang="en">Browse properties</span>
+        <span data-lang="cn">浏览全部房源</span>
+        →
+      </button>
+      <button class="btn-ghost" onclick="window.location.href='map.html'">
+        🗺️ <span data-lang="th" class="lang-active">ดูในแผนที่</span><span data-lang="en">View on map</span><span data-lang="cn">查看地图</span>
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">20+</div>
+        <div class="hero-stat-label">
+          <span data-lang="th" class="lang-active">ทรัพย์ที่พร้อมขาย/เช่า</span>
+          <span data-lang="en">Properties for sale/rent</span>
+          <span data-lang="cn">可售/可租房源</span>
+        </div>
       </div>
-      <h1>
-        <span data-lang="th" class="lang-active">เดินดู<em>ภายในบ้าน</em>ก่อน<br>ไปดูสถานที่จริง</span>
-        <span data-lang="en">Walk through the <em>inside</em><br>before you visit in person</span>
-      </h1>
-      <p class="lede" data-lang="th-fallback">
-        <span data-lang="th" class="lang-active">เลือกบ้านหรือคอนโดที่ใช่ ด้วยภาพถ่ายและ virtual walkthrough ที่ให้คุณเห็นทุกห้องจริง ก่อนนัดไปดูสถานที่ ประหยัดเวลา ตัดสินใจง่ายขึ้น</span>
-        <span data-lang="en">Find the right place using real photos and virtual walkthroughs that show you every room before you book a viewing. Save time, decide with confidence.</span>
+      <div>
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">
+          <span data-lang="th" class="lang-active">ภาษา ไทย/อังกฤษ/จีน</span>
+          <span data-lang="en">Languages, TH/EN/CN</span>
+          <span data-lang="cn">三种语言：泰/英/中</span>
+        </div>
+      </div>
+      <div>
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">
+          <span data-lang="th" class="lang-active">ทรัพย์จริง ไม่มีนายหน้าซ้ำซ้อน</span>
+          <span data-lang="en">Direct from owner</span>
+          <span data-lang="cn">房东直营</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <img src="images/web/property1-living.jpg" alt="Interior walkthrough preview">
+    <div class="drag-hint">🖱️ <span data-lang="th" class="lang-active">คลิกลากเพื่อหมุนดู</span><span data-lang="en">Drag to look around</span><span data-lang="cn">拖动查看</span></div>
+    <div class="walk-badge">
+      <div class="walk-badge-icon">🧭</div>
+      <div class="walk-badge-text">
+        <strong data-lang="th" class="lang-active">เดินดูในบ้านได้จริง</strong>
+        <strong data-lang="en">Real interior walkthrough</strong>
+        <strong data-lang="cn">真实室内漫游</strong>
+        <span data-lang="th" class="lang-active">คลิกเชื่อมห้องต่อห้อง เหมือนเดินเข้าไปเอง</span>
+        <span data-lang="en">Click between rooms, just like being there</span>
+        <span data-lang="cn">点击切换房间，亲临其境</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK SEARCH -->
+<div class="search-wrap">
+  <div class="search-bar">
+    <div class="field">
+      <label data-lang="th" class="lang-active">ประเภทรายการ</label>
+      <label data-lang="en">Listing type</label>
+      <label data-lang="cn">类型</label>
+      <select id="qListingType">
+        <option value="">—</option>
+        <option value="rent" data-lang="th" class="lang-active">เช่า</option>
+        <option value="rent" data-lang="en">Rent</option>
+        <option value="rent" data-lang="cn">出租</option>
+        <option value="sale" data-lang="th" class="lang-active">ขาย</option>
+        <option value="sale" data-lang="en">Sale</option>
+        <option value="sale" data-lang="cn">出售</option>
+      </select>
+    </div>
+    <div class="field">
+      <label data-lang="th" class="lang-active">ทำเล</label>
+      <label data-lang="en">Location</label>
+      <label data-lang="cn">地区</label>
+      <input id="qLocation" type="text" placeholder="พัทยา, บางแสน, ศรีราชา...">
+    </div>
+    <div class="field">
+      <label data-lang="th" class="lang-active">ประเภททรัพย์</label>
+      <label data-lang="en">Property type</label>
+      <label data-lang="cn">房产类型</label>
+      <select id="qType">
+        <option value="">—</option>
+        <option value="house">บ้านเดี่ยว / House / 独立屋</option>
+        <option value="condo">คอนโด / Condo / 公寓</option>
+        <option value="townhouse">ทาวน์โฮม / Townhouse / 联排别墅</option>
+        <option value="land">ที่ดิน / Land / 土地</option>
+        <option value="villa">พูลวิลล่า / Pool Villa / 泳池别墅</option>
+      </select>
+    </div>
+    <div class="field">
+      <label data-lang="th" class="lang-active">ช่วงราคา</label>
+      <label data-lang="en">Price range</label>
+      <label data-lang="cn">价格区间</label>
+      <select id="qPrice">
+        <option value="">—</option>
+        <option value="0-10000">≤ 10,000 ฿</option>
+        <option value="10000-30000">10,000–30,000 ฿</option>
+        <option value="30000-1000000">30,000+ ฿ / ≤ 1M ฿</option>
+        <option value="1000000-5000000">1M–5M ฿</option>
+        <option value="5000000-999999999">5M+ ฿</option>
+      </select>
+    </div>
+    <button class="search-btn" onclick="goSearch()">
+      🔍 <span data-lang="th" class="lang-active">ค้นหา</span><span data-lang="en">Search</span><span data-lang="cn">搜索</span>
+    </button>
+  </div>
+</div>
+
+<!-- HOT DEALS -->
+<div class="hotdeal-strip" id="hotDealSection" style="display:none;">
+  <div class="hotdeal-scroll">
+    <div class="section-head" style="margin-bottom:18px;">
+      <div>
+        <h2 style="font-size:1.5rem;">🔥 <span data-lang="th" class="lang-active">ทรัพย์ดีลเด่น</span><span data-lang="en">Hot Deals</span><span data-lang="cn">优选房源</span></h2>
+        <p><span data-lang="th" class="lang-active">ทรัพย์เด่น ราคาพิเศษ อย่าพลาด!</span><span data-lang="en">Featured properties at special prices</span><span data-lang="cn">精选优惠房源，不容错过！</span></p>
+      </div>
+    </div>
+    <div class="hotdeal-row" id="hotDealRow"></div>
+  </div>
+</div>
+
+<!-- LISTINGS -->
+<div class="section" id="listings">
+  <div class="section-head">
+    <div>
+      <h2 data-lang="th" class="lang-active">ทรัพย์ที่พร้อมขาย/เช่า</h2>
+      <h2 data-lang="en">Available properties</h2>
+      <h2 data-lang="cn">可售/可租房源</h2>
+      <p>
+        <span data-lang="th" class="lang-active">คลิกที่ทรัพย์เพื่อดูภาพ รายละเอียด และ virtual walkthrough</span>
+        <span data-lang="en">Click a listing to see photos, details, and the virtual walkthrough</span>
+        <span data-lang="cn">点击房源查看照片、详情和虚拟漫游</span>
       </p>
-      <div class="hero-actions">
-        <button class="btn-primary" onclick="document.getElementById('listings').scrollIntoView({behavior:'smooth'})">
-          <span data-lang="th" class="lang-active">ดูทรัพย์ทั้งหมด</span>
-          <span data-lang="en">Browse properties</span>
-          →
-        </button>
-        <button class="btn-ghost" onclick="openMapView()">
-          🗺️ <span data-lang="th" class="lang-active">ดูในแผนที่</span><span data-lang="en">View on map</span>
-        </button>
-        <button class="btn-ghost" onclick="contactLine()">
-          <span data-lang="th" class="lang-active">ทักไลน์สอบถาม</span>
-          <span data-lang="en">Chat on LINE</span>
-        </button>
-      </div>
-      <div class="hero-stats">
-        <div>
-          <div class="hero-stat-num">20+</div>
-          <div class="hero-stat-label" data-lang="th" data-active="">
-            <span data-lang="th" class="lang-active">ทรัพย์ที่พร้อมให้เช่า</span>
-            <span data-lang="en">Properties available</span>
-          </div>
-        </div>
-        <div>
-          <div class="hero-stat-num">2</div>
-          <div class="hero-stat-label">
-            <span data-lang="th" class="lang-active">ภาษา ไทย/อังกฤษ</span>
-            <span data-lang="en">Languages, TH/EN</span>
-          </div>
-        </div>
-        <div>
-          <div class="hero-stat-num">100%</div>
-          <div class="hero-stat-label">
-            <span data-lang="th" class="lang-active">ทรัพย์จริง ไม่มีนายหน้าซ้ำซ้อน</span>
-            <span data-lang="en">Direct from owner</span>
-          </div>
-        </div>
-      </div>
     </div>
-
-    <div class="hero-visual">
-      <img src="images/web/property1-living.jpg" alt="Interior walkthrough preview">
-      <div class="drag-hint">🖱️ <span data-lang="th" class="lang-active">คลิกลากเพื่อหมุนดู</span><span data-lang="en">Drag to look around</span></div>
-      <div class="walk-badge">
-        <div class="walk-badge-icon">🧭</div>
-        <div class="walk-badge-text">
-          <strong data-lang="th" class="lang-active">เดินดูในบ้านได้จริง</strong>
-          <strong data-lang="en">Real interior walkthrough</strong>
-          <span data-lang="th" class="lang-active">คลิกเชื่อมห้องต่อห้อง เหมือนเดินเข้าไปเอง</span>
-          <span data-lang="en">Click between rooms, just like being there</span>
-        </div>
-      </div>
-    </div>
+    <div class="result-count" id="resultCount"></div>
   </div>
-
-  <!-- SEARCH -->
-  <div class="search-wrap">
-    <div class="search-bar">
-      <div class="field">
-        <label data-lang="th" class="lang-active">ทำเล</label>
-        <label data-lang="en">Location</label>
-        <input id="fLocation" type="text" placeholder="พัทยา, บางแสน, ศรีราชา...">
-      </div>
-      <div class="field">
-        <label data-lang="th" class="lang-active">ประเภท</label>
-        <label data-lang="en">Type</label>
-        <select id="fType">
-          <option value="" data-lang="th" class="lang-active">ทั้งหมด</option>
-          <option value="house">บ้านเดี่ยว / House</option>
-          <option value="condo">คอนโด / Condo</option>
-          <option value="townhouse">ทาวน์โฮม / Townhouse</option>
-        </select>
-      </div>
-      <div class="field">
-        <label data-lang="th" class="lang-active">ช่วงราคา</label>
-        <label data-lang="en">Price range</label>
-        <select id="fPrice">
-          <option value="">—</option>
-          <option value="0-10000">≤ 10,000 ฿</option>
-          <option value="10000-20000">10,000–20,000 ฿</option>
-          <option value="20000-35000">20,000–35,000 ฿</option>
-          <option value="35000-999999">35,000+ ฿</option>
-        </select>
-      </div>
-      <div class="field">
-        <label data-lang="th" class="lang-active">ห้องนอนขั้นต่ำ</label>
-        <label data-lang="en">Min. bedrooms</label>
-        <select id="fBeds">
-          <option value="">—</option>
-          <option value="1">1+</option>
-          <option value="2">2+</option>
-          <option value="3">3+</option>
-          <option value="4">4+</option>
-        </select>
-      </div>
-      <button class="search-btn" onclick="applySearch()">
-        🔍 <span data-lang="th" class="lang-active">ค้นหา</span><span data-lang="en">Search</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- LISTINGS -->
-  <div class="section" id="listings">
-    <div class="section-head">
-      <div>
-        <h2 data-lang="th" class="lang-active">ทรัพย์ที่พร้อมให้เช่า</h2>
-        <h2 data-lang="en">Available properties</h2>
-        <p>
-          <span data-lang="th" class="lang-active">คลิกที่ทรัพย์เพื่อดูภาพ รายละเอียด และ virtual walkthrough</span>
-          <span data-lang="en">Click a listing to see photos, details, and the virtual walkthrough</span>
-        </p>
-      </div>
-      <div style="display:flex;align-items:center;gap:14px;">
-        <div class="result-count" id="resultCount"></div>
-        <div class="lang-toggle">
-          <button class="view-toggle-btn active" data-view="list" onclick="openListView()">
-            📋 <span data-lang="th" class="lang-active">รายการ</span><span data-lang="en">List</span>
-          </button>
-          <button class="view-toggle-btn" data-view="map" onclick="openMapView()">
-            🗺️ <span data-lang="th" class="lang-active">แผนที่</span><span data-lang="en">Map</span>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="grid" id="listingGrid"></div>
-  </div>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-col">
-        <h4>
-          <span data-lang="th" class="lang-active">MP Area</span>
-          <span data-lang="en">MP Area</span>
-        </h4>
-        <p data-lang="th" class="lang-active">เช่าบ้าน คอนโด ที่ดิน ชลบุรี ที่เรา ดูภายในก่อนตัดสินใจ</p>
-        <p data-lang="en">Houses, condos and land for rent in Chonburi. See inside before you decide.</p>
-      </div>
-      <div class="footer-col">
-        <h4 data-lang="th" class="lang-active">ติดต่อ</h4>
-        <h4 data-lang="en">Contact</h4>
-        <a href="tel:+66923959969">📞 092-395-9969</a>
-        <a href="tel:+66932342457">📞 093-234-2457</a>
-        <a href="#" onclick="contactLine()">💬 LINE ID: Khate095</a>
-      </div>
-      <div class="footer-col">
-        <h4 data-lang="th" class="lang-active">พื้นที่ให้บริการ</h4>
-        <h4 data-lang="en">Service area</h4>
-        <p>Pattaya · Jomtien · Sriracha · Bang Saen · Ban Bueng</p>
-      </div>
-    </div>
-    <div class="footer-bottom">© 2026 MP Area</div>
-  </footer>
-</div>
-
-<!-- ===== DETAIL VIEW ===== -->
-<div id="detailView" class="detail-wrap">
-  <div class="detail-header">
-    <div class="back-link" onclick="closeDetail()">
-      ← <span data-lang="th" class="lang-active">กลับไปหน้ารายการ</span><span data-lang="en">Back to listings</span>
-    </div>
-    <div class="detail-title-row">
-      <div>
-        <h1 id="detailTitle"></h1>
-        <div class="detail-loc" id="detailLoc"></div>
-      </div>
-      <div class="detail-price">
-        <div class="amt" id="detailPriceAmt"></div>
-        <div class="per" id="detailPricePer"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="detail-specs" id="detailSpecs"></div>
-
-  <div class="media-tabs">
-    <button class="media-tab" data-tab="tour" onclick="switchMediaTab('tour')">
-      🧭 <span data-lang="th" class="lang-active">เดินดูภายใน</span><span data-lang="en">Walkthrough</span>
-    </button>
-    <button class="media-tab" data-tab="gallery" onclick="switchMediaTab('gallery')">
-      🖼️ <span data-lang="th" class="lang-active">รูปภาพทั้งหมด</span><span data-lang="en">All photos</span>
+  <div class="grid" id="listingGrid"></div>
+  <div style="text-align:center;margin-top:32px;">
+    <button class="btn-ghost" onclick="window.location.href='properties.html'">
+      <span data-lang="th" class="lang-active">ดูทรัพย์ทั้งหมด</span><span data-lang="en">View all properties</span><span data-lang="cn">查看全部房源</span>
     </button>
   </div>
-
-  <div class="media-stage">
-    <div id="tourStage">
-      <div class="tour-viewer">
-        <div id="panorama"></div>
-        <div class="tour-empty" id="tourEmptyState">
-          <div class="tour-empty-icon">🧭</div>
-          <strong data-lang="th" class="lang-active">ยังไม่มี virtual walkthrough สำหรับทรัพย์นี้</strong>
-          <strong data-lang="en">No virtual walkthrough yet for this property</strong>
-          <span style="font-size:0.85rem;opacity:0.8;max-width:380px;" data-lang="th" class="lang-active">เจ้าของกำลังถ่ายภาพ 360° เพิ่มเติม สามารถดูรูปภาพทั้งหมดได้ที่แท็บ "รูปภาพทั้งหมด"</span>
-          <span style="font-size:0.85rem;opacity:0.8;max-width:380px;" data-lang="en">The owner is preparing 360° photos. Check the "All photos" tab in the meantime.</span>
-        </div>
-      </div>
-      <div class="room-pills" id="roomPills"></div>
-    </div>
-    <div id="galleryStage" style="display:none;">
-      <div class="gallery-grid" id="galleryGrid"></div>
-    </div>
-  </div>
-
-  <div class="detail-columns">
-    <div>
-      <h3 data-lang="th" class="lang-active">รายละเอียด</h3>
-      <h3 data-lang="en">Description</h3>
-      <p class="detail-desc" id="detailDesc"></p>
-
-      <h3 style="margin-top:30px;" data-lang="th" class="lang-active">สิ่งอำนวยความสะดวก</h3>
-      <h3 style="margin-top:30px;" data-lang="en">Amenities</h3>
-      <div class="amenity-grid" id="amenityGrid"></div>
-    </div>
-
-    <div class="contact-card">
-      <h3 data-lang="th" class="lang-active">สนใจทรัพย์นี้?</h3>
-      <h3 data-lang="en">Interested in this property?</h3>
-      <p data-lang="th" class="lang-active">ทักหาเราเพื่อนัดดูสถานที่จริง หรือสอบถามรายละเอียดเพิ่มเติม</p>
-      <p data-lang="en">Message us to schedule a viewing or ask for more details.</p>
-      <button class="contact-btn line" onclick="contactLine()">
-        💬 <span data-lang="th" class="lang-active">ทักไลน์</span><span data-lang="en">Message on LINE</span>
-      </button>
-      <button class="contact-btn wa" onclick="contactWhatsApp()">
-        📱 WhatsApp
-      </button>
-      <button class="contact-btn tel" onclick="contactTel()">
-        📞 <span data-lang="th" class="lang-active">โทร 092-395-9969</span><span data-lang="en">Call 092-395-9969</span>
-      </button>
-      <button class="contact-btn tel" onclick="window.location.href='tel:+66932342457'">
-        📞 <span data-lang="th" class="lang-active">โทร 093-234-2457</span><span data-lang="en">Call 093-234-2457</span>
-      </button>
-      <div class="note-box">
-        <span data-lang="th" class="lang-active">💡 แนะนำให้ดู virtual walkthrough ก่อนนัดหมาย เพื่อให้แน่ใจว่าทรัพย์นี้ตรงกับที่คุณต้องการ</span>
-        <span data-lang="en">💡 We recommend viewing the walkthrough before scheduling, to confirm this property fits your needs.</span>
-      </div>
-    </div>
-  </div>
 </div>
 
-<!-- ===== MAP VIEW ===== -->
-<div id="mapView" class="map-view-wrap">
-  <div class="map-header">
-    <div class="back-link" onclick="openListView()">
-      ← <span data-lang="th" class="lang-active">กลับไปหน้ารายการ</span><span data-lang="en">Back to listings</span>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>MP Area</h4>
+      <p data-lang="th" class="lang-active">เช่าบ้าน คอนโด ที่ดิน ชลบุรี ที่เรา ดูภายในก่อนตัดสินใจ</p>
+      <p data-lang="en">Houses, condos and land for sale or rent in Chonburi. See inside before you decide.</p>
+      <p data-lang="cn">春武里房屋、公寓与土地的买卖与租赁。先线上看房，再做决定。</p>
     </div>
-    <h2 data-lang="th" class="lang-active">แผนที่ทรัพย์ทั้งหมด</h2>
-    <h2 data-lang="en">All properties on map</h2>
+    <div class="footer-col">
+      <h4 data-lang="th" class="lang-active">ติดต่อ</h4>
+      <h4 data-lang="en">Contact</h4>
+      <h4 data-lang="cn">联系我们</h4>
+      <a href="tel:+66923959969">📞 092-395-9969</a>
+      <a href="tel:+66932342457">📞 093-234-2457</a>
+      <a href="#" onclick="contactLine()">💬 LINE ID: Khate095</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-lang="th" class="lang-active">พื้นที่ให้บริการ</h4>
+      <h4 data-lang="en">Service area</h4>
+      <h4 data-lang="cn">服务区域</h4>
+      <p>Pattaya · Jomtien · Sriracha · Bang Saen · Ban Bueng</p>
+    </div>
   </div>
-  <div id="mapContainer"></div>
+  <div class="footer-bottom">© 2026 MP Area</div>
+</footer>
+
+<!-- FLOATING CONTACT BUTTONS -->
+<div class="floating-contacts">
+  <button class="fc-btn line" onclick="contactLine()" title="LINE">💬</button>
+  <button class="fc-btn wa" onclick="contactWhatsApp()" title="WhatsApp">📱</button>
+  <button class="fc-btn tel" onclick="contactTel()" title="Call">📞</button>
 </div>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <img id="lightboxImg" src="">
-</div>
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+function goSearch(){
+  const params = buildQueryString({
+    listing_type: document.getElementById('qListingType').value,
+    location: document.getElementById('qLocation').value,
+    type: document.getElementById('qType').value,
+    price: document.getElementById('qPrice').value
+  });
+  window.location.href = 'properties.html' + (params ? '?' + params : '');
+}
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="script.js"></script>
+function onLangChange(){
+  renderHome();
+}
+
+function renderHome(){
+  const grid = document.getElementById('listingGrid');
+  const shown = ALL_PROPERTIES.slice(0, 6);
+  renderCardGrid(grid, shown);
+  document.getElementById('resultCount').textContent = t(`${ALL_PROPERTIES.length} รายการทั้งหมด`, `${ALL_PROPERTIES.length} properties total`, `共 ${ALL_PROPERTIES.length} 个房源`);
+
+  const hotDeals = ALL_PROPERTIES.filter(p => p.isHotDeal);
+  const hotSection = document.getElementById('hotDealSection');
+  if (hotDeals.length){
+    hotSection.style.display = 'block';
+    document.getElementById('hotDealRow').innerHTML = hotDeals.map(renderPropertyCard).join('');
+  } else {
+    hotSection.style.display = 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  initSharedUI();
+  await loadAllProperties();
+  renderHome();
+});
+</script>
 </body>
 </html>

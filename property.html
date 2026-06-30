@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">รายละเอียดทรัพย์ — MP Area</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
+</head>
+<body>
+
+<div class="topbar" style="position:relative;">
+  <div class="topbar-inner">
+    <div class="logo">
+      <div class="logo-mark">MP</div>
+      <span>MP Area</span>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">
+        <span data-lang="th" class="lang-active">หน้าแรก</span><span data-lang="en">Home</span><span data-lang="cn">首页</span>
+      </a>
+      <a href="properties.html">
+        <span data-lang="th" class="lang-active">ค้นหาทรัพย์</span><span data-lang="en">Properties</span><span data-lang="cn">房源搜索</span>
+      </a>
+      <a href="map.html">
+        <span data-lang="th" class="lang-active">แผนที่</span><span data-lang="en">Map</span><span data-lang="cn">地图</span>
+      </a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle lang3">
+        <button data-lang="th" class="active" onclick="setLang('th')">ไทย</button>
+        <button data-lang="en" onclick="setLang('en')">EN</button>
+        <button data-lang="cn" onclick="setLang('cn')">中文</button>
+      </div>
+      <button class="contact-pill" onclick="contactLine()">
+        💬 <span data-lang="th" class="lang-active">ติดต่อ</span><span data-lang="en">Contact</span><span data-lang="cn">联系</span>
+      </button>
+      <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰</button>
+    </div>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html">
+    <span data-lang="th" class="lang-active">หน้าแรก</span><span data-lang="en">Home</span><span data-lang="cn">首页</span>
+  </a>
+  <span class="sep">/</span>
+  <a href="properties.html">
+    <span data-lang="th" class="lang-active">ค้นหาทรัพย์</span><span data-lang="en">Properties</span><span data-lang="cn">房源搜索</span>
+  </a>
+  <span class="sep">/</span>
+  <span id="breadcrumbTitle">…</span>
+</div>
+
+<div id="notFoundState" style="display:none;" class="static-page">
+  <h1 data-lang="th" class="lang-active">ไม่พบทรัพย์นี้</h1>
+  <h1 data-lang="en">Property not found</h1>
+  <h1 data-lang="cn">未找到该房源</h1>
+  <p data-lang="th" class="lang-active">ทรัพย์นี้อาจถูกลบหรือไม่มีอยู่ในระบบแล้ว</p>
+  <p data-lang="en">This property may have been removed or no longer exists.</p>
+  <p data-lang="cn">该房源可能已被移除或不存在。</p>
+  <a href="properties.html" class="btn-primary" style="display:inline-flex;text-decoration:none;">
+    <span data-lang="th" class="lang-active">ดูทรัพย์ทั้งหมด</span><span data-lang="en">Browse properties</span><span data-lang="cn">浏览全部房源</span>
+  </a>
+</div>
+
+<div id="propertyContent" style="display:none;">
+  <div class="detail-header">
+    <div class="detail-title-row">
+      <div>
+        <div style="display:flex;gap:8px;margin-bottom:10px;" id="badgeRow"></div>
+        <h1 id="detailTitle"></h1>
+        <div class="detail-loc" id="detailLoc"></div>
+      </div>
+      <div class="detail-price">
+        <div class="amt" id="detailPriceAmt"></div>
+        <div class="per" id="detailPricePer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-specs" id="detailSpecs"></div>
+
+  <div class="media-tabs">
+    <button class="media-tab" data-tab="tour" onclick="switchMediaTab('tour')">
+      🧭 <span data-lang="th" class="lang-active">เดินดูภายใน</span><span data-lang="en">Walkthrough</span><span data-lang="cn">虚拟漫游</span>
+    </button>
+    <button class="media-tab" data-tab="gallery" onclick="switchMediaTab('gallery')">
+      🖼️ <span data-lang="th" class="lang-active">รูปภาพทั้งหมด</span><span data-lang="en">All photos</span><span data-lang="cn">全部照片</span>
+    </button>
+  </div>
+
+  <div class="media-stage">
+    <div id="tourStage">
+      <div class="tour-viewer">
+        <div id="panorama"></div>
+        <div class="tour-empty" id="tourEmptyState">
+          <div class="tour-empty-icon">🧭</div>
+          <strong data-lang="th" class="lang-active">ยังไม่มี virtual walkthrough สำหรับทรัพย์นี้</strong>
+          <strong data-lang="en">No virtual walkthrough yet for this property</strong>
+          <strong data-lang="cn">该房源暂无虚拟漫游</strong>
+          <span style="font-size:0.85rem;opacity:0.8;max-width:380px;" data-lang="th" class="lang-active">เจ้าของกำลังถ่ายภาพ 360° เพิ่มเติม สามารถดูรูปภาพทั้งหมดได้ที่แท็บ "รูปภาพทั้งหมด"</span>
+          <span style="font-size:0.85rem;opacity:0.8;max-width:380px;" data-lang="en">The owner is preparing 360° photos. Check the "All photos" tab in the meantime.</span>
+          <span style="font-size:0.85rem;opacity:0.8;max-width:380px;" data-lang="cn">房东正在拍摄360°照片，请暂时查看"全部照片"标签。</span>
+        </div>
+      </div>
+      <div class="room-pills" id="roomPills"></div>
+    </div>
+    <div id="galleryStage" style="display:none;">
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </div>
+
+  <div class="detail-columns">
+    <div>
+      <h3 data-lang="th" class="lang-active">รายละเอียด</h3>
+      <h3 data-lang="en">Description</h3>
+      <h3 data-lang="cn">详情描述</h3>
+      <p class="detail-desc" id="detailDesc"></p>
+
+      <h3 style="margin-top:30px;" data-lang="th" class="lang-active">สิ่งอำนวยความสะดวก</h3>
+      <h3 style="margin-top:30px;" data-lang="en">Amenities</h3>
+      <h3 style="margin-top:30px;" data-lang="cn">设施</h3>
+      <div class="amenity-grid" id="amenityGrid"></div>
+    </div>
+
+    <div class="contact-card">
+      <h3 data-lang="th" class="lang-active">สนใจทรัพย์นี้?</h3>
+      <h3 data-lang="en">Interested in this property?</h3>
+      <h3 data-lang="cn">对这个房源感兴趣？</h3>
+      <p data-lang="th" class="lang-active">ทักหาเราเพื่อนัดดูสถานที่จริง หรือสอบถามรายละเอียดเพิ่มเติม</p>
+      <p data-lang="en">Message us to schedule a viewing or ask for more details.</p>
+      <p data-lang="cn">联系我们安排实地看房或咨询更多详情。</p>
+      <button class="contact-btn line" onclick="contactLine()">
+        💬 <span data-lang="th" class="lang-active">ทักไลน์</span><span data-lang="en">Message on LINE</span><span data-lang="cn">LINE咨询</span>
+      </button>
+      <button class="contact-btn wa" onclick="contactWhatsAppHere()">
+        📱 WhatsApp
+      </button>
+      <button class="contact-btn tel" onclick="contactTel()">
+        📞 092-395-9969
+      </button>
+      <button class="contact-btn tel" onclick="contactTel2()">
+        📞 093-234-2457
+      </button>
+      <div class="note-box">
+        <span data-lang="th" class="lang-active">💡 แนะนำให้ดู virtual walkthrough ก่อนนัดหมาย เพื่อให้แน่ใจว่าทรัพย์นี้ตรงกับที่คุณต้องการ</span>
+        <span data-lang="en">💡 We recommend viewing the walkthrough before scheduling, to confirm this property fits your needs.</span>
+        <span data-lang="cn">💡 建议先查看虚拟漫游，确认房源符合您的需求后再预约看房。</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="">
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>MP Area</h4>
+      <p data-lang="th" class="lang-active">เช่าบ้าน คอนโด ที่ดิน ชลบุรี ที่เรา</p>
+      <p data-lang="en">Houses, condos and land for sale or rent in Chonburi.</p>
+      <p data-lang="cn">春武里房屋、公寓与土地的买卖与租赁。</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-lang="th" class="lang-active">ติดต่อ</h4>
+      <h4 data-lang="en">Contact</h4>
+      <h4 data-lang="cn">联系我们</h4>
+      <a href="tel:+66923959969">📞 092-395-9969</a>
+      <a href="tel:+66932342457">📞 093-234-2457</a>
+      <a href="#" onclick="contactLine()">💬 LINE ID: Khate095</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-lang="th" class="lang-active">พื้นที่ให้บริการ</h4>
+      <h4 data-lang="en">Service area</h4>
+      <h4 data-lang="cn">服务区域</h4>
+      <p>Pattaya · Jomtien · Sriracha · Bang Saen · Ban Bueng</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 MP Area</div>
+</footer>
+
+<div class="floating-contacts">
+  <button class="fc-btn line" onclick="contactLine()" title="LINE">💬</button>
+  <button class="fc-btn wa" onclick="contactWhatsAppHere()" title="WhatsApp">📱</button>
+  <button class="fc-btn tel" onclick="contactTel()" title="Call">📞</button>
+</div>
+
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+let currentProperty = null;
+let panoramaViewer = null;
+let activeRoomIndex = 0;
+
+function contactWhatsAppHere(){
+  contactWhatsApp(currentProperty ? getField(currentProperty, 'title') : null);
+}
+
+function renderPropertyDetail(){
+  const id = parseInt(getQueryParam('id'), 10);
+  const p = ALL_PROPERTIES.find(x => x.id === id);
+
+  if (!p){
+    document.getElementById('notFoundState').style.display = 'block';
+    document.getElementById('propertyContent').style.display = 'none';
+    return;
+  }
+  currentProperty = p;
+  document.getElementById('notFoundState').style.display = 'none';
+  document.getElementById('propertyContent').style.display = 'block';
+
+  const title = getField(p, 'title');
+  const loc = getField(p, 'location');
+  const desc = getField(p, 'description');
+  const typeLabel = TYPE_LABELS[p.type] ? TYPE_LABELS[p.type][currentLang] : p.type;
+
+  document.title = title + ' — MP Area';
+  document.getElementById('pageTitle').textContent = title + ' — MP Area';
+  document.getElementById('breadcrumbTitle').textContent = title;
+  document.getElementById('detailTitle').textContent = title;
+  document.getElementById('detailLoc').textContent = `📍 ${loc}${p.address ? ' · ' + p.address : ''}`;
+  document.getElementById('detailPriceAmt').textContent = priceLabel(p).split('/')[0];
+  document.getElementById('detailPricePer').textContent = p.listingType === 'rent'
+    ? t('ต่อเดือน','per month','每月')
+    : t('ราคาขาย','Sale price','售价');
+  document.getElementById('detailDesc').textContent = desc;
+
+  document.getElementById('badgeRow').innerHTML = `
+    ${listingBadge(p)}
+    ${p.isHotDeal ? `<span class="badge-hotdeal">${t('ดีลเด่น','Hot Deal','优选')}</span>` : ''}
+  `;
+
+  document.getElementById('detailSpecs').innerHTML = `
+    <div class="spec-chip">🏠 ${typeLabel}</div>
+    ${p.beds ? `<div class="spec-chip">🛏️ ${p.beds} ${t('ห้องนอน','Bedrooms','卧室')}</div>` : ''}
+    ${p.baths ? `<div class="spec-chip">🛁 ${p.baths} ${t('ห้องน้ำ','Bathrooms','浴室')}</div>` : ''}
+    <div class="spec-chip">📐 ${p.sqm || p.landSqm || '-'} ${t('ตร.ม.','sqm','平方米')}</div>
+  `;
+
+  document.getElementById('amenityGrid').innerHTML = p.amenities.length
+    ? p.amenities.map(a => {
+        const meta = AMENITY_META[a];
+        const label = meta ? meta[currentLang] : a;
+        const icon = meta ? meta.icon : '✓';
+        return `<div class="amenity">${icon} ${label}</div>`;
+      }).join('')
+    : `<p style="color:var(--ink-soft);font-size:0.9rem;">${t('ไม่มีข้อมูล','No information available','暂无信息')}</p>`;
+
+  document.getElementById('galleryGrid').innerHTML = p.images.map(img =>
+    `<img src="${img}" onclick="openLightbox('${img}')" loading="lazy" onerror="this.src='https://placehold.co/800x600/2B3540/FAF7F1?text=No+Image'">`
+  ).join('');
+
+  setupTourTab(p);
+  switchMediaTab(p.tour && p.tour.available ? 'tour' : 'gallery');
+}
+
+function switchMediaTab(tab){
+  document.querySelectorAll('.media-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  document.getElementById('tourStage').style.display = tab === 'tour' ? 'block' : 'none';
+  document.getElementById('galleryStage').style.display = tab === 'gallery' ? 'block' : 'none';
+  if (tab === 'tour') initPanorama();
+}
+
+function setupTourTab(p){
+  const hasTour = p.tour && p.tour.available && p.tour.rooms.length;
+  const pills = document.getElementById('roomPills');
+
+  if (!hasTour){
+    pills.innerHTML = '';
+    document.getElementById('panorama').innerHTML = '';
+    document.getElementById('tourEmptyState').style.display = 'flex';
+    return;
+  }
+  document.getElementById('tourEmptyState').style.display = 'none';
+
+  pills.innerHTML = p.tour.rooms.map((r,i) => `
+    <button class="room-pill ${i===0?'active':''}" onclick="selectRoom(${i})">
+      ${currentLang==='th' ? r.name : currentLang==='cn' ? r.nameCn : r.nameEn}
+    </button>
+  `).join('');
+  activeRoomIndex = 0;
+}
+
+function selectRoom(i){
+  activeRoomIndex = i;
+  document.querySelectorAll('.room-pill').forEach((el,idx) => el.classList.toggle('active', idx===i));
+  initPanorama();
+}
+
+function initPanorama(){
+  const p = currentProperty;
+  if (!p || !p.tour || !p.tour.available) return;
+  const room = p.tour.rooms[activeRoomIndex];
+  if (!room || !room.pano) return;
+
+  if (panoramaViewer) { panoramaViewer.destroy(); panoramaViewer = null; }
+  panoramaViewer = pannellum.viewer('panorama', {
+    type: 'equirectangular',
+    panorama: room.pano,
+    autoLoad: true,
+    compass: false
+  });
+}
+
+function openLightbox(src){
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('active');
+}
+
+function onLangChange(){
+  if (currentProperty) renderPropertyDetail();
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  initSharedUI();
+  await loadAllProperties();
+  renderPropertyDetail();
+});
+</script>
+</body>
+</html>

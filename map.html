@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แผนที่ทรัพย์ — MP Area</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+
+<div class="topbar" style="position:relative;">
+  <div class="topbar-inner">
+    <div class="logo">
+      <div class="logo-mark">MP</div>
+      <span>MP Area</span>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">
+        <span data-lang="th" class="lang-active">หน้าแรก</span><span data-lang="en">Home</span><span data-lang="cn">首页</span>
+      </a>
+      <a href="properties.html">
+        <span data-lang="th" class="lang-active">ค้นหาทรัพย์</span><span data-lang="en">Properties</span><span data-lang="cn">房源搜索</span>
+      </a>
+      <a href="map.html" class="current">
+        <span data-lang="th" class="lang-active">แผนที่</span><span data-lang="en">Map</span><span data-lang="cn">地图</span>
+      </a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle lang3">
+        <button data-lang="th" class="active" onclick="setLang('th')">ไทย</button>
+        <button data-lang="en" onclick="setLang('en')">EN</button>
+        <button data-lang="cn" onclick="setLang('cn')">中文</button>
+      </div>
+      <button class="contact-pill" onclick="contactLine()">
+        💬 <span data-lang="th" class="lang-active">ติดต่อ</span><span data-lang="en">Contact</span><span data-lang="cn">联系</span>
+      </button>
+      <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰</button>
+    </div>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html">
+    <span data-lang="th" class="lang-active">หน้าแรก</span><span data-lang="en">Home</span><span data-lang="cn">首页</span>
+  </a>
+  <span class="sep">/</span>
+  <span data-lang="th" class="lang-active">แผนที่ทรัพย์</span><span data-lang="en">Property map</span><span data-lang="cn">房源地图</span>
+</div>
+
+<div class="map-header">
+  <h2 data-lang="th" class="lang-active">แผนที่ทรัพย์ทั้งหมด</h2>
+  <h2 data-lang="en">All properties on map</h2>
+  <h2 data-lang="cn">全部房源地图</h2>
+</div>
+<div id="mapContainer"></div>
+
+<div class="floating-contacts">
+  <button class="fc-btn line" onclick="contactLine()" title="LINE">💬</button>
+  <button class="fc-btn wa" onclick="contactWhatsApp()" title="WhatsApp">📱</button>
+  <button class="fc-btn tel" onclick="contactTel()" title="Call">📞</button>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+let leafletMap = null;
+let mapMarkers = [];
+
+function initMap(){
+  const withCoords = ALL_PROPERTIES.filter(p => p.lat && p.lng);
+  const lats = withCoords.map(p => p.lat);
+  const lngs = withCoords.map(p => p.lng);
+  const centerLat = lats.length ? lats.reduce((a,b)=>a+b,0) / lats.length : 13.14;
+  const centerLng = lngs.length ? lngs.reduce((a,b)=>a+b,0) / lngs.length : 100.93;
+
+  if (!leafletMap){
+    leafletMap = L.map('mapContainer').setView([centerLat, centerLng], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(leafletMap);
+  }
+
+  mapMarkers.forEach(m => leafletMap.removeLayer(m));
+  mapMarkers = [];
+
+  withCoords.forEach(p => {
+    const title = getField(p, 'title');
+    const loc = getField(p, 'location');
+
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="map-pin-price">${priceLabel(p)}</div>`,
+      iconSize: [0,0],
+      iconAnchor: [0, 10]
+    });
+
+    const marker = L.marker([p.lat, p.lng], { icon }).addTo(leafletMap);
+    const popupHtml = `
+      <div class="map-popup">
+        <img src="${p.cover}" alt="${title}" onerror="this.src='https://placehold.co/800x600/2B3540/FAF7F1?text=No+Image'">
+        <h4>${title}</h4>
+        <div class="mp-price">${priceLabel(p)}</div>
+        <div class="mp-loc">📍 ${loc}</div>
+        <button onclick="window.location.href='property.html?id=${p.id}'">
+          ${t('ดูรายละเอียด','View details','查看详情')}
+        </button>
+      </div>
+    `;
+    marker.bindPopup(popupHtml);
+    mapMarkers.push(marker);
+  });
+
+  setTimeout(() => leafletMap.invalidateSize(), 150);
+}
+
+function onLangChange(){
+  if (leafletMap) initMap();
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  initSharedUI();
+  await loadAllProperties();
+  initMap();
+});
+</script>
+</body>
+</html>

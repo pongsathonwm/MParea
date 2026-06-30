@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ค้นหาทรัพย์ — MP Area</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="topbar" style="position:relative;">
+  <div class="topbar-inner">
+    <div class="logo">
+      <div class="logo-mark">MP</div>
+      <span>MP Area</span>
+    </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">
+        <span data-lang="th" class="lang-active">หน้าแรก</span><span data-lang="en">Home</span><span data-lang="cn">首页</span>
+      </a>
+      <a href="properties.html" class="current">
+        <span data-lang="th" class="lang-active">ค้นหาทรัพย์</span><span data-lang="en">Properties</span><span data-lang="cn">房源搜索</span>
+      </a>
+      <a href="map.html">
+        <span data-lang="th" class="lang-active">แผนที่</span><span data-lang="en">Map</span><span data-lang="cn">地图</span>
+      </a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-toggle lang3">
+        <button data-lang="th" class="active" onclick="setLang('th')">ไทย</button>
+        <button data-lang="en" onclick="setLang('en')">EN</button>
+        <button data-lang="cn" onclick="setLang('cn')">中文</button>
+      </div>
+      <button class="contact-pill" onclick="contactLine()">
+        💬 <span data-lang="th" class="lang-active">ติดต่อ</span><span data-lang="en">Contact</span><span data-lang="cn">联系</span>
+      </button>
+      <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰</button>
+    </div>
+  </div>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html">
+    <span data-lang="th" class="lang-active">หน้าแรก</span><span data-lang="en">Home</span><span data-lang="cn">首页</span>
+  </a>
+  <span class="sep">/</span>
+  <span data-lang="th" class="lang-active">ค้นหาทรัพย์</span><span data-lang="en">Properties</span><span data-lang="cn">房源搜索</span>
+</div>
+
+<div class="properties-layout">
+  <!-- FILTER PANEL -->
+  <aside class="filter-panel">
+    <h3 data-lang="th" class="lang-active">ตัวกรอง</h3>
+    <h3 data-lang="en">Filters</h3>
+    <h3 data-lang="cn">筛选条件</h3>
+
+    <div class="filter-group">
+      <div class="filter-toggle-row">
+        <button id="ftAll" class="active" onclick="setListingFilter('')">
+          <span data-lang="th" class="lang-active">ทั้งหมด</span><span data-lang="en">All</span><span data-lang="cn">全部</span>
+        </button>
+        <button id="ftSale" onclick="setListingFilter('sale')">
+          <span data-lang="th" class="lang-active">ขาย</span><span data-lang="en">Sale</span><span data-lang="cn">出售</span>
+        </button>
+        <button id="ftRent" onclick="setListingFilter('rent')">
+          <span data-lang="th" class="lang-active">เช่า</span><span data-lang="en">Rent</span><span data-lang="cn">出租</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label class="group-label" data-lang="th" class="lang-active">ทำเล</label>
+      <label class="group-label" data-lang="en">Location</label>
+      <label class="group-label" data-lang="cn">地区</label>
+      <input type="text" id="fLocation" placeholder="พัทยา, บางแสน, ศรีราชา...">
+    </div>
+
+    <div class="filter-group">
+      <label class="group-label" data-lang="th" class="lang-active">ประเภททรัพย์</label>
+      <label class="group-label" data-lang="en">Property type</label>
+      <label class="group-label" data-lang="cn">房产类型</label>
+      <div class="checkbox-row"><input type="checkbox" value="house" class="fType"> <span>บ้านเดี่ยว / House / 独立屋</span></div>
+      <div class="checkbox-row"><input type="checkbox" value="condo" class="fType"> <span>คอนโด / Condo / 公寓</span></div>
+      <div class="checkbox-row"><input type="checkbox" value="townhouse" class="fType"> <span>ทาวน์โฮม / Townhouse / 联排别墅</span></div>
+      <div class="checkbox-row"><input type="checkbox" value="land" class="fType"> <span>ที่ดิน / Land / 土地</span></div>
+      <div class="checkbox-row"><input type="checkbox" value="villa" class="fType"> <span>พูลวิลล่า / Pool Villa / 泳池别墅</span></div>
+    </div>
+
+    <div class="filter-group">
+      <label class="group-label" data-lang="th" class="lang-active">ห้องนอนขั้นต่ำ</label>
+      <label class="group-label" data-lang="en">Min. bedrooms</label>
+      <label class="group-label" data-lang="cn">最少卧室数</label>
+      <select id="fBeds">
+        <option value="">—</option>
+        <option value="1">1+</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+        <option value="4">4+</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="group-label" data-lang="th" class="lang-active">ห้องน้ำขั้นต่ำ</label>
+      <label class="group-label" data-lang="en">Min. bathrooms</label>
+      <label class="group-label" data-lang="cn">最少浴室数</label>
+      <select id="fBaths">
+        <option value="">—</option>
+        <option value="1">1+</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="group-label" data-lang="th" class="lang-active">ช่วงราคา</label>
+      <label class="group-label" data-lang="en">Price range</label>
+      <label class="group-label" data-lang="cn">价格区间</label>
+      <select id="fPrice">
+        <option value="">—</option>
+        <option value="0-10000">≤ 10,000 ฿</option>
+        <option value="10000-30000">10,000–30,000 ฿</option>
+        <option value="30000-1000000">30,000–1,000,000 ฿</option>
+        <option value="1000000-5000000">1M–5M ฿</option>
+        <option value="5000000-999999999">5M+ ฿</option>
+      </select>
+    </div>
+
+    <button class="filter-apply-btn" onclick="applyFilters()">
+      <span data-lang="th" class="lang-active">ค้นหา</span><span data-lang="en">Apply filters</span><span data-lang="cn">应用筛选</span>
+    </button>
+    <span class="filter-reset-link" onclick="resetFilters()">
+      <span data-lang="th" class="lang-active">ล้างตัวกรอง</span><span data-lang="en">Reset filters</span><span data-lang="cn">重置筛选</span>
+    </span>
+  </aside>
+
+  <!-- RESULTS -->
+  <div>
+    <div class="sort-bar">
+      <div class="result-count" id="resultCount"></div>
+      <select id="sortBy" onchange="applyFilters()">
+        <option value="date_desc" data-lang="th" class="lang-active">วันที่ประกาศล่าสุด</option>
+        <option value="date_desc" data-lang="en">Newest listed</option>
+        <option value="date_desc" data-lang="cn">最新发布</option>
+        <option value="price_asc">ราคาต่ำ → สูง / Price: Low to High / 价格从低到高</option>
+        <option value="price_desc">ราคาสูง → ต่ำ / Price: High to Low / 价格从高到低</option>
+        <option value="sqm_desc">พื้นที่มาก → น้อย / Size: Large to Small / 面积从大到小</option>
+      </select>
+    </div>
+    <div class="grid" id="listingGrid"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>MP Area</h4>
+      <p data-lang="th" class="lang-active">เช่าบ้าน คอนโด ที่ดิน ชลบุรี ที่เรา ดูภายในก่อนตัดสินใจ</p>
+      <p data-lang="en">Houses, condos and land for sale or rent in Chonburi.</p>
+      <p data-lang="cn">春武里房屋、公寓与土地的买卖与租赁。</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-lang="th" class="lang-active">ติดต่อ</h4>
+      <h4 data-lang="en">Contact</h4>
+      <h4 data-lang="cn">联系我们</h4>
+      <a href="tel:+66923959969">📞 092-395-9969</a>
+      <a href="tel:+66932342457">📞 093-234-2457</a>
+      <a href="#" onclick="contactLine()">💬 LINE ID: Khate095</a>
+    </div>
+    <div class="footer-col">
+      <h4 data-lang="th" class="lang-active">พื้นที่ให้บริการ</h4>
+      <h4 data-lang="en">Service area</h4>
+      <h4 data-lang="cn">服务区域</h4>
+      <p>Pattaya · Jomtien · Sriracha · Bang Saen · Ban Bueng</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 MP Area</div>
+</footer>
+
+<div class="floating-contacts">
+  <button class="fc-btn line" onclick="contactLine()" title="LINE">💬</button>
+  <button class="fc-btn wa" onclick="contactWhatsApp()" title="WhatsApp">📱</button>
+  <button class="fc-btn tel" onclick="contactTel()" title="Call">📞</button>
+</div>
+
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+let activeListingType = '';
+
+function setListingFilter(type){
+  activeListingType = type;
+  document.getElementById('ftAll').classList.toggle('active', type === '');
+  document.getElementById('ftSale').classList.toggle('active', type === 'sale');
+  document.getElementById('ftRent').classList.toggle('active', type === 'rent');
+  applyFilters();
+}
+
+function resetFilters(){
+  document.getElementById('fLocation').value = '';
+  document.querySelectorAll('.fType').forEach(c => c.checked = false);
+  document.getElementById('fBeds').value = '';
+  document.getElementById('fBaths').value = '';
+  document.getElementById('fPrice').value = '';
+  setListingFilter('');
+}
+
+function applyFilters(){
+  const location = document.getElementById('fLocation').value.trim().toLowerCase();
+  const checkedTypes = Array.from(document.querySelectorAll('.fType:checked')).map(c => c.value);
+  const minBeds = parseInt(document.getElementById('fBeds').value, 10) || 0;
+  const minBaths = parseInt(document.getElementById('fBaths').value, 10) || 0;
+  const priceRange = document.getElementById('fPrice').value;
+  const sortBy = document.getElementById('sortBy').value;
+
+  let results = ALL_PROPERTIES.filter(p => {
+    if (activeListingType && p.listingType !== activeListingType) return false;
+    if (location){
+      const locText = (p.location + p.locationEn + p.locationCn).toLowerCase();
+      if (!locText.includes(location)) return false;
+    }
+    if (checkedTypes.length && !checkedTypes.includes(p.type)) return false;
+    if (minBeds && p.beds < minBeds) return false;
+    if (minBaths && p.baths < minBaths) return false;
+    if (priceRange){
+      const [min, max] = priceRange.split('-').map(Number);
+      if (p.price < min || p.price > max) return false;
+    }
+    return true;
+  });
+
+  if (sortBy === 'price_asc') results.sort((a,b) => a.price - b.price);
+  else if (sortBy === 'price_desc') results.sort((a,b) => b.price - a.price);
+  else if (sortBy === 'sqm_desc') results.sort((a,b) => (b.sqm||b.landSqm||0) - (a.sqm||a.landSqm||0));
+  else results.sort((a,b) => (b.dateListed||'').localeCompare(a.dateListed||''));
+
+  renderCardGrid(document.getElementById('listingGrid'), results);
+  document.getElementById('resultCount').textContent = t(`พบ ${results.length} รายการ`, `${results.length} properties found`, `找到 ${results.length} 个房源`);
+}
+
+function applyFiltersFromURL(){
+  const listingType = getQueryParam('listing_type');
+  const location = getQueryParam('location');
+  const type = getQueryParam('type');
+  const price = getQueryParam('price');
+
+  if (listingType) setListingFilter(listingType);
+  if (location) document.getElementById('fLocation').value = location;
+  if (type){
+    const cb = document.querySelector(`.fType[value="${type}"]`);
+    if (cb) cb.checked = true;
+  }
+  if (price) document.getElementById('fPrice').value = price;
+}
+
+function onLangChange(){
+  applyFilters();
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  initSharedUI();
+  await loadAllProperties();
+  applyFiltersFromURL();
+  applyFilters();
+});
+</script>
+</body>
+</html>
